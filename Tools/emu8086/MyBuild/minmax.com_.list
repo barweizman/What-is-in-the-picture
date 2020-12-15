@@ -1,0 +1,145 @@
+EMU8086 GENERATED LISTING. MACHINE CODE <- SOURCE.
+ 
+minmax.com_ -- emu8086 assembler version: 4.08  
+ 
+[ 18/05/2013  --  10:52:23 ] 
+ 
+===================================================================================================
+[LINE]     LOC: MACHINE CODE                          SOURCE
+===================================================================================================
+ 
+[   1]        :                                       include emu8086.inc
+[   2]        :                                       
+[   3]        :                                       
+[   4]        :                                       org  100h
+[   5]        :                                       
+[   6]    0100: 00 00                                 maxnumber dw ?
+[   7]    0102: 00 00                                 minnumber dw ?
+[   8]    0104: 10 00                                 num0 dw 16
+[   9]    0106: 03 00                                 num1 dw 3
+[  10]        :                                       
+[  11]    0108: EB 00                                 jmp start
+[  12]        :                                       
+[  13]    010A:                                       start:
+[  14]    010A: B8 C0 5A                              mov ax,23232
+[  15]    010D: 50                                    push ax
+[  16]    010E: A1 04 01                              mov ax, num0
+[  17]    0111: E8 C9 00                              call print_num
+[  18]    0114: 50 56 EB 03 0D 0A 00 BE 18 01 2E 8A   printn
+                04 3C 00 74 07 46 B4 0E CD 10 EB F2 
+                5E 58                               
+[  19]    012E: A1 06 01                              mov ax, num1
+[  20]    0131: E8 A9 00                              call print_num
+[  21]    0134: 50 56 EB 03 0D 0A 00 BE 38 01 2E 8A   printn
+                04 3C 00 74 07 46 B4 0E CD 10 EB F2 
+                5E 58                               
+[  22]    014E: 50                                    push ax
+[  23]    014F: 53                                    push bx
+[  24]    0150: 52                                    push dx
+[  25]    0151: FF 36 06 01                           push num1
+[  26]    0155: FF 36 04 01                           push num0
+[  27]    0159: FF 36 00 01                           push offset[maxnumber]
+[  28]    015D: E8 F5 00                              call max
+[  29]    0160: 5A                                    pop dx
+[  30]    0161: 5B                                    pop bx
+[  31]    0162: 58                                    pop ax
+[  32]    0163: A1 00 01                              mov ax, maxnumber
+[  33]    0166: E8 74 00                              call print_num
+[  34]    0169: 50 56 EB 03 0D 0A 00 BE 6D 01 2E 8A   printn
+                04 3C 00 74 07 46 B4 0E CD 10 EB F2 
+                5E 58                               
+[  35]    0183: 50                                    push ax
+[  36]    0184: 53                                    push bx
+[  37]    0185: 52                                    push dx
+[  38]    0186: FF 36 06 01                           push num1
+[  39]    018A: FF 36 04 01                           push num0
+[  40]    018E: FF 36 02 01                           push offset[minnumber]
+[  41]    0192: E8 D4 00                              call min
+[  42]    0195: 5A                                    pop dx
+[  43]    0196: 5B                                    pop bx
+[  44]    0197: 58                                    pop ax
+[  45]    0198: A1 02 01                              mov ax, minnumber
+[  46]    019B: E8 3F 00                              call print_num
+[  47]    019E: 50 56 EB 03 0D 0A 00 BE A2 01 2E 8A   printn
+                04 3C 00 74 07 46 B4 0E CD 10 EB F2 
+                5E 58                               
+[  48]    01B8: 58                                    pop ax
+[  49]    01B9: E8 21 00                              call print_num
+[  50]    01BC: 50 56 EB 03 0D 0A 00 BE C0 01 2E 8A   printn
+                04 3C 00 74 07 46 B4 0E CD 10 EB F2 
+                5E 58                               
+[  51]        :                                       
+[  52]        :                                       
+[  53]    01D6: B4 00                                 mov ah, 0
+[  54]    01D8: CD 16                                 int 16h
+[  55]        :                                       
+[  56]    01DA: C3                                    ret
+[  57]    01DB: EB 26 52 50 3D 00 00 75 0A 50 B0 30   DEFINE_PRINT_NUM
+                B4 0E CD 10 58 EB 12 3D 00 00 79 0A 
+                F7 D8 50 B0 2D B4 0E CD 10 58 E8 05 
+                00 58 5A C3                         
+[  58]    0203: EB 50 50 53 51 52 B9 01 00 BB 10 27   DEFINE_PRINT_NUM_UNS
+                3D 00 00 74 32 83 FB 00 74 35 83 F9 
+                00 74 04 3B C3 72 14 B9 00 00 BA 00 
+                00 F7 F3 04 30 50 8A C0 B4 0E CD 10 
+                58 8B C2 50 BA 00 00 8B C3 2E F7 36 
+                53 02 8B D8 58 EB CE 50 B0 30 B4 0E 
+                CD 10 58 5A 59 5B 58 C3 0A 00       
+[  59]        :                                       
+[  60]        :                                       
+[  61]        :                                       PRINT_AL_CHR    MACRO
+[  62]        :                                       mov     ah,0Eh
+[  63]        :                                       int     10h
+[  64]        :                                       mov     al,0Dh
+[  65]        :                                       int     10h
+[  66]        :                                       mov     al,0Ah
+[  67]        :                                       int     10h
+[  68]        :                                       ENDM
+[  69]        :                                       
+[  70]    0255:                                       max proc
+[  71]    0255: 5B                                    pop bx
+[  72]    0256: 58                                    pop ax
+[  73]    0257: 5A                                    pop dx
+[  74]    0258: 3B C2                                 cmp ax, dx
+[  75]    025A: 7D 02                                 jge num0o
+[  76]    025C: 7C 04                                 jl  num1o
+[  77]    025E:                                       num0o:
+[  78]    025E: 89 07                                 mov [bx], ax
+[  79]    0260: EB 04                                 jmp out1
+[  80]    0262:                                       num1o:
+[  81]    0262: 89 17                                 mov [bx], dx
+[  82]    0264: EB 00                                 jmp out1
+[  83]    0266:                                       out1:
+[  84]    0266: C2 06 00                              ret 6
+[  85]        :                                       endp
+[  86]        :                                       
+[  87]    0269:                                       min proc
+[  88]    0269: 55                                    push bp
+[  89]    026A: 8B EC                                 mov bp,sp
+[  90]    026C: 83 C5 02                              add bp, 2
+[  91]    026F: 5B                                    pop bx
+[  92]    0270: 58                                    pop ax
+[  93]    0271: 5A                                    pop dx
+[  94]    0272: 3B C2                                 cmp ax, dx
+[  95]    0274: 7D 02                                 jge num0p
+[  96]    0276: 7C 04                                 jl  num1p
+[  97]    0278:                                       num0p:
+[  98]    0278: 89 17                                 mov [bx], dx
+[  99]    027A: EB EA                                 jmp out1
+[ 100]    027C:                                       num1p:
+[ 101]    027C: 89 07                                 mov [bx], ax
+[ 102]    027E: EB E6                                 jmp out1
+[ 103]    0280:                                       out2:
+[ 104]    0280: 8B E5                                 mov sp,bp
+[ 105]    0282: 5D                                    pop bp
+[ 106]    0283: C2 06 00                              ret 6
+[ 107]        :                                       endp
+[ 108]        :                                       
+ 
+===================================================================================================
+ 
+
+
+
+
+===================================================================================================

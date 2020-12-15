@@ -1,0 +1,27 @@
+< THE SYMBOL TABLE >  phyb.com_  --  emu8086 assembler version: 4.08 
+===================================================================================================
+Name                     	Offset    	Size      	Type      	Segment   
+===================================================================================================
+START                    	00102     	-1        	LABEL     	(NOSEG)   
+ATSERET                  	00109     	-1        	LABEL     	(NOSEG)   
+S_DCL_LOC1TMP            	00116     	1         	VAR       	(NOSEG)   
+SKIP_DCL_LOC1TMP         	00119     	-1        	LABEL     	(NOSEG)   
+NEXT_CHAR_LOC1TMP        	0011C     	-1        	LABEL     	(NOSEG)   
+PRINTED_LOC1TMP          	0012A     	-1        	LABEL     	(NOSEG)   
+PRINT_NUM                	0012F     	-1        	NEAR      	(NOSEG)   
+NOT_ZERO_LOC2TMP         	00140     	-1        	LABEL     	(NOSEG)   
+POSITIVE_LOC2TMP         	0014F     	-1        	LABEL     	(NOSEG)   
+PRINTED_LOC2TMP          	00152     	-1        	LABEL     	(NOSEG)   
+SKIP_PROC_PRINT_NUM_LOC2TMP	00155     	-1        	LABEL     	(NOSEG)   
+PRINT_NUM_UNS            	00157     	-1        	NEAR      	(NOSEG)   
+BEGIN_PRINT_LOC3TMP      	00166     	-1        	LABEL     	(NOSEG)   
+CALC_LOC3TMP             	00174     	-1        	LABEL     	(NOSEG)   
+SKIP_LOC3TMP             	00188     	-1        	LABEL     	(NOSEG)   
+PRINT_ZERO_LOC3TMP       	00198     	-1        	LABEL     	(NOSEG)   
+END_PRINT_LOC3TMP        	001A0     	-1        	LABEL     	(NOSEG)   
+TEN_LOC3TMP              	001A5     	2         	VAR       	(NOSEG)   
+SKIP_PROC_PRINT_NUM_UNS_LOC4TMP	001A7     	-1        	LABEL     	(NOSEG)   
+===================================================================================================
+[ 14/05/2013  --  12:52:07 ] 
+< END >
+ 

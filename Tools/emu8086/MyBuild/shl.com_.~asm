@@ -1,0 +1,19 @@
+
+
+org 100h
+
+jmp start
+
+start:
+mov ax, 49
+div byte ptr[7]
+cmp ah, 0
+je true
+jne false
+true:
+false:
+ret
+
+
+
+; [SOURCE]: D:\Users\user-pc\Desktop\Magshimim\Computers101\shl.asm

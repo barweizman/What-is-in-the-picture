@@ -1,0 +1,22 @@
+include emu8086.inc
+
+org 100h
+
+jmp start
+
+start:
+mov cx, 3
+mov bl, 5
+mov al, 1
+power:
+mul bl
+loop power
+call print_num
+PRINTN
+ret
+DEFINE_PRINT_NUM
+DEFINE_PRINT_NUM_UNS
+
+
+
+; [SOURCE]: D:\Users\user-pc\Desktop\Magshimim\Computers101\atseret.asm

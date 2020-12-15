@@ -1,0 +1,25 @@
+org 100h
+
+jmp start
+
+start:
+mov     al, 15        ;ex4
+mov     bl, 11010011b ;ex5
+mov     bh, al
+mov     al, bl
+mov     bl, bh        ;ex6
+xchg    al, bl        ;ex7
+mov al, 0f2h
+mov bl, al            ;ex8 - The broblem was that BX is word sized and AL is byte sized so I changed BX to BL
+mov ax, 1011b
+mov bx, 4f1h
+add ax, bx
+mov dx, ax            ;ex9
+
+mov     ah, 0
+int     16h
+ret
+
+
+
+; [SOURCE]: D:\Users\user-pc\Desktop\Magshimim\Computers101\ex1.asm

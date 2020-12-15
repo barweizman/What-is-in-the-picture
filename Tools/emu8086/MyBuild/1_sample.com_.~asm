@@ -1,0 +1,57 @@
+
+
+org 100h
+
+jmp start
+
+enword:    db      "hello world", 24h
+base db 3
+
+csren:
+push bx
+push cx
+push ax
+push dx
+mov bx, offset [enword]
+enloop1:
+cmp byte ptr[bx], '$'
+jne en1
+pop dx
+pop ax
+pop cx
+pop bx
+ret
+
+en1:
+cmp byte ptr[bx], ' '
+je space1
+mov cl, base
+add [bx], cl
+sub byte ptr[bx], 97
+mov al, [bx]
+xor ah, ah
+mov dl, 26
+idiv dl
+mov [bx], ah
+add byte ptr[bx], 97
+inc bx
+jmp enloop1
+
+space1:
+inc bx
+jmp enloop1
+
+start:  mov     dx, enword
+mov     ah, 09h
+int     21h
+call csren
+mov     dx, enword
+mov     ah, 09h
+int     21h
+mov     ah, 0
+int     16h
+ret
+
+
+
+; [SOURCE]: D:\Users\user-pc\Desktop\1_sample.asm

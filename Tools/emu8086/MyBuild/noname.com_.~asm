@@ -1,0 +1,99 @@
+include emu8086.inc
+
+
+org  100h
+
+maxnumber dw ?
+minnumber dw ?
+num0 dw 16
+num1 dw 3
+
+jmp start
+
+start:
+mov ax, num0
+call print_num
+printn
+mov ax, num1
+call print_num
+printn
+push ax
+push bx
+push dx
+push num1
+push num0
+push offset[maxnumber]
+call max
+pop dx
+pop bx
+pop ax
+mov ax, maxnumber
+call print_num
+printn
+push ax
+push bx
+push dx
+push num1
+push num0
+push offset[minnumber]
+call min
+pop dx
+pop bx
+pop ax
+mov ax, minnumber
+call print_num
+printn
+
+ret
+DEFINE_PRINT_NUM
+DEFINE_PRINT_NUM_UNS
+
+
+PRINT_AL_CHR    MACRO
+mov     ah,0Eh
+int     10h
+mov     al,0Dh
+int     10h
+mov     al,0Ah
+int     10h
+ENDM
+
+max proc
+pop bx
+pop ax
+pop dx
+cmp ax, dx
+jge num0o
+jl  num1o
+num0o:
+mov [bx], ax
+jmp out1
+num1o:
+mov [bx], dx
+jmp out1
+out1:
+ret 6
+endp
+
+min proc
+push bp
+mov bp,sp
+add bp, 2
+pop bx
+pop ax
+pop dx
+cmp ax, dx
+jge num0p
+jl  num1p
+num0p:
+mov [bx], dx
+jmp out1
+num1p:
+mov [bx], ax
+jmp out1
+out2:
+mov sp,bp
+pop bp
+ret 6
+endp
+

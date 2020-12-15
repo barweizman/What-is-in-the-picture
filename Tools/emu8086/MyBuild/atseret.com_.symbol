@@ -1,0 +1,27 @@
+< THE SYMBOL TABLE >  atseret.com_  --  emu8086 assembler version: 4.08 
+===================================================================================================
+Name                     	Offset    	Size      	Type      	Segment   
+===================================================================================================
+START                    	00102     	-1        	LABEL     	(NOSEG)   
+POWER                    	00109     	-1        	LABEL     	(NOSEG)   
+S_DCL_LOC1TMP            	00114     	1         	VAR       	(NOSEG)   
+SKIP_DCL_LOC1TMP         	00117     	-1        	LABEL     	(NOSEG)   
+NEXT_CHAR_LOC1TMP        	0011A     	-1        	LABEL     	(NOSEG)   
+PRINTED_LOC1TMP          	00128     	-1        	LABEL     	(NOSEG)   
+PRINT_NUM                	0012D     	-1        	NEAR      	(NOSEG)   
+NOT_ZERO_LOC2TMP         	0013E     	-1        	LABEL     	(NOSEG)   
+POSITIVE_LOC2TMP         	0014D     	-1        	LABEL     	(NOSEG)   
+PRINTED_LOC2TMP          	00150     	-1        	LABEL     	(NOSEG)   
+SKIP_PROC_PRINT_NUM_LOC2TMP	00153     	-1        	LABEL     	(NOSEG)   
+PRINT_NUM_UNS            	00155     	-1        	NEAR      	(NOSEG)   
+BEGIN_PRINT_LOC3TMP      	00164     	-1        	LABEL     	(NOSEG)   
+CALC_LOC3TMP             	00172     	-1        	LABEL     	(NOSEG)   
+SKIP_LOC3TMP             	00186     	-1        	LABEL     	(NOSEG)   
+PRINT_ZERO_LOC3TMP       	00196     	-1        	LABEL     	(NOSEG)   
+END_PRINT_LOC3TMP        	0019E     	-1        	LABEL     	(NOSEG)   
+TEN_LOC3TMP              	001A3     	2         	VAR       	(NOSEG)   
+SKIP_PROC_PRINT_NUM_UNS_LOC4TMP	001A5     	-1        	LABEL     	(NOSEG)   
+===================================================================================================
+[ 14/05/2013  --  12:55:00 ] 
+< END >
+ 

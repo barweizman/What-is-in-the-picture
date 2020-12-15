@@ -1,0 +1,18 @@
+
+
+org 100h
+
+jmp start
+
+start:
+mov ax, 1
+lp:
+add bx, ax
+add ax, 2
+cmp bx, 100
+jl lp
+ret
+
+
+
+; [SOURCE]: D:\Users\user-pc\Desktop\Magshimim\Computers101\div7.asm

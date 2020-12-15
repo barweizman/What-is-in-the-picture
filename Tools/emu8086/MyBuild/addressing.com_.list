@@ -1,0 +1,165 @@
+EMU8086 GENERATED LISTING. MACHINE CODE <- SOURCE.
+ 
+addressing.com_ -- emu8086 assembler version: 4.08  
+ 
+[ 14/05/2013  --  12:16:25 ] 
+ 
+===================================================================================================
+[LINE]     LOC: MACHINE CODE                          SOURCE
+===================================================================================================
+ 
+[   1]        :                                       include emu8086.inc
+[   2]        :                                       
+[   3]        :                                       
+[   4]        :                                       org  100h
+[   5]        :                                       
+[   6]    0100: EB 14                                 jmp start
+[   7]        :                                       
+[   8]        :                                       ; [belongs to (A)]
+[   9]    0102: 07 00                                 num1    dw 7
+[  10]    0104: 03 00                                 num2    dw 3
+[  11]    0106: 02 00                                 num3    dw 2
+[  12]        :                                       
+[  13]        :                                       ; [belongs to (B)]
+[  14]    0108: 41 42 43 44                           chrs    db  'A','B','C','D'
+[  15]    010C: 08 01                                 chrs_ptr    dw  offset chrs
+[  16]        :                                       
+[  17]        :                                       ; [belongs to (D)] - for the "static" part, change only these two lines
+[  18]    010E: 02 01                                 static_num1_ptr    dw  offset num1;
+[  19]    0110: 12 01                                 static_num1_ptr_ptr    dw  dynamic_num1_ptr;
+[  20]        :                                       
+[  21]        :                                       ; [belongs to (E)] - for the "dynamic" part, do NOT use the "offset"
+[  22]        :                                       ; keyword and do NOT change the next two lines
+[  23]    0112: 00 00                                 dynamic_num1_ptr   dw 0;
+[  24]    0114: 00 00                                 dynamic_num1_ptr_ptr dw 0;
+[  25]        :                                       
+[  26]    0116:                                       start:
+[  27]        :                                       
+[  28]        :                                       ; PART (A)
+[  29]        :                                       ; Print 24. Use num1, num2, num3 exactly once.
+[  30]        :                                       ; Do not use immediates!
+[  31]    0116: 50 56 EB 1D 50 61 72 74 20 28 41 29   PRINTN   "Part (A) - should print 24"
+                20 2D 20 73 68 6F 75 6C 64 20 70 72 
+                69 6E 74 20 32 34 0D 0A 00 BE 1A 01 
+                2E 8A 04 3C 00 74 07 46 B4 0E CD 10 
+                EB F2 5E 58                         
+[  32]        :                                       ; Write your code here
+[  33]    014A: A1 02 01                              mov ax, num1
+[  34]    014D: 03 06 04 01                           add ax, num2
+[  35]    0151: 03 06 06 01                           add ax, num3
+[  36]    0155: F7 26 06 01                           mul num3
+[  37]    0159: E8 93 01                              call print_num
+[  38]    015C: 50 56 EB 03 0D 0A 00 BE 60 01 2E 8A   PRINTN
+                04 3C 00 74 07 46 B4 0E CD 10 EB F2 
+                5E 58                               
+[  39]        :                                       
+[  40]        :                                       
+[  41]        :                                       ; PART (B)
+[  42]        :                                       ; Print 'C'. Do not use 'chrs' but only 'chrs_ptr'
+[  43]    0176: 50 56 EB 1C 50 61 72 74 20 28 42 29   PRINTN   "Part (B) - should print C"
+                20 2D 20 73 68 6F 75 6C 64 20 70 72 
+                69 6E 74 20 43 0D 0A 00 BE 7A 01 2E 
+                8A 04 3C 00 74 07 46 B4 0E CD 10 EB 
+                F2 5E 58                            
+[  44]        :                                       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;add chrs_ptr, 2
+[  45]        :                                       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;mov al, [chrs_ptr]
+[  46]    01A9: B4 0E CD 10 B0 0D CD 10 B0 0A CD 10   PRINT_AL_CHR
+                                                    
+[  47]    01B5: 50 56 EB 03 0D 0A 00 BE B9 01 2E 8A   PRINTN
+                04 3C 00 74 07 46 B4 0E CD 10 EB F2 
+                5E 58                               
+[  48]        :                                       
+[  49]        :                                       ; PART (C)
+[  50]        :                                       ; Print '15', using ONLY 'mov' and 'lea'.
+[  51]        :                                       ; Do NOT use arithmetic instrutions (add, inc, mul, etc.)
+[  52]    01CF: 50 56 EB 1D 50 61 72 74 20 28 43 29   PRINTN   "Part (C) - should print 15"
+                20 2D 20 73 68 6F 75 6C 64 20 70 72 
+                69 6E 74 20 31 35 0D 0A 00 BE D3 01 
+                2E 8A 04 3C 00 74 07 46 B4 0E CD 10 
+                EB F2 5E 58                         
+[  53]    0203: B8 0A 00                              mov     ax,10
+[  54]    0206: 8B D0                                 mov     dx, ax
+[  55]    0208: BB 04 00                              mov     bx,4
+[  56]    020B: 8D 5F 01                              lea bx, [dx+bx+1]
+[  57]    020E: 8B C3                                 mov ax, bx
+[  58]    0210: 50 56 EB 03 0D 0A 00 BE 14 02 2E 8A   PRINTN
+                04 3C 00 74 07 46 B4 0E CD 10 EB F2 
+                5E 58                               
+[  59]        :                                       
+[  60]        :                                       ; PART (D)
+[  61]        :                                       ; Make the "static" code print 7 by only changing the above two
+[  62]        :                                       ; definitions. Do NOT add/change the next 5 lines
+[  63]    022A: 50 56 EB 1C 50 61 72 74 20 28 44 29   PRINTN   "Part (D) - should print 7"
+                20 2D 20 73 68 6F 75 6C 64 20 70 72 
+                69 6E 74 20 37 0D 0A 00 BE 2E 02 2E 
+                8A 04 3C 00 74 07 46 B4 0E CD 10 EB 
+                F2 5E 58                            
+[  64]    025D: 8B 1E 10 01                           mov     bx,static_num1_ptr_ptr
+[  65]    0261: 8B 1F                                 mov     bx,[bx]
+[  66]    0263: 8B 07                                 mov     ax,[bx]
+[  67]    0265: E8 87 00                              call    print_num
+[  68]    0268: 50 56 EB 03 0D 0A 00 BE 6C 02 2E 8A   PRINTN
+                04 3C 00 74 07 46 B4 0E CD 10 EB F2 
+                5E 58                               
+[  69]        :                                       
+[  70]        :                                       
+[  71]        :                                       ; PART (E)
+[  72]        :                                       ; Make the "dynamic" code print 7 without using the "offset" keyword.
+[  73]        :                                       ; Write your code here
+[  74]    0282: 50 56 EB 1C 50 61 72 74 20 28 45 29   PRINTN   "Part (E) - should print 7"
+                20 2D 20 73 68 6F 75 6C 64 20 70 72 
+                69 6E 74 20 37 0D 0A 00 BE 86 02 2E 
+                8A 04 3C 00 74 07 46 B4 0E CD 10 EB 
+                F2 5E 58                            
+[  75]    02B5: BB 02 01                              lea bx, num1
+[  76]    02B8: 89 1E 12 01                           mov dynamic_num1_ptr, bx
+[  77]    02BC: BB 12 01                              lea bx, dynamic_num1_ptr
+[  78]    02BF: 89 1E 14 01                           mov dynamic_num1_ptr_ptr, bx
+[  79]        :                                       
+[  80]        :                                       ; Do not change the next 4 lines
+[  81]    02C3: 8B 1E 14 01                           mov     bx,dynamic_num1_ptr_ptr
+[  82]    02C7: 8B 1F                                 mov     bx,[bx]
+[  83]    02C9: 8B 07                                 mov     ax,[bx]
+[  84]    02CB: E8 21 00                              call    print_num
+[  85]    02CE: 50 56 EB 03 0D 0A 00 BE D2 02 2E 8A   PRINTN
+                04 3C 00 74 07 46 B4 0E CD 10 EB F2 
+                5E 58                               
+[  86]    02E8: B4 00                                 mov     ah, 0
+[  87]    02EA: CD 16                                 int     16h
+[  88]        :                                       
+[  89]        :                                       
+[  90]    02EC: C3                                    ret
+[  91]    02ED: EB 26 52 50 3D 00 00 75 0A 50 B0 30   DEFINE_PRINT_NUM
+                B4 0E CD 10 58 EB 12 3D 00 00 79 0A 
+                F7 D8 50 B0 2D B4 0E CD 10 58 E8 05 
+                00 58 5A C3                         
+[  92]    0315: EB 50 50 53 51 52 B9 01 00 BB 10 27   DEFINE_PRINT_NUM_UNS
+                3D 00 00 74 32 83 FB 00 74 35 83 F9 
+                00 74 04 3B C3 72 14 B9 00 00 BA 00 
+                00 F7 F3 04 30 50 8A C0 B4 0E CD 10 
+                58 8B C2 50 BA 00 00 8B C3 2E F7 36 
+                65 03 8B D8 58 EB CE 50 B0 30 B4 0E 
+                CD 10 58 5A 59 5B 58 C3 0A 00       
+[  93]        :                                       
+[  94]        :                                       
+[  95]        :                                       PRINT_AL_CHR    MACRO
+[  96]        :                                       mov     ah,0Eh
+[  97]        :                                       int     10h
+[  98]        :                                       mov     al,0Dh
+[  99]        :                                       int     10h
+[ 100]        :                                       mov     al,0Ah
+[ 101]        :                                       int     10h
+[ 102]        :                                       ENDM
+[ 103]        :                                       
+[ 104]        :                                       
+[ 105]        :                                       
+[ 106]        :                                       
+[ 107]        :                                       
+ 
+===================================================================================================
+ 
+
+
+
+
+===================================================================================================

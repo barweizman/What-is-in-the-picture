@@ -1,0 +1,23 @@
+include emu8086.inc
+
+org 100h
+
+jmp start
+
+start:
+mov cx, 4
+mov al, 1
+mov bl, 1
+atseret:
+mul bl
+inc bl
+loop atseret
+call print_num
+PRINTN
+ret
+DEFINE_PRINT_NUM
+DEFINE_PRINT_NUM_UNS
+
+
+
+; [SOURCE]: D:\Users\user-pc\Desktop\Magshimim\Computers101\phyb.asm

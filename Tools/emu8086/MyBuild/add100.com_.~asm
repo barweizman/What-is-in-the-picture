@@ -1,0 +1,29 @@
+include emu8086.inc
+
+org 100h
+
+jmp start
+
+start:
+mov ax, 1
+mov dx, 1
+mov bx, 1
+mov cx, 18
+call print_num
+PRINTN
+call print_num
+PRINTN
+phyb:
+mov bx, dx
+mov dx, ax
+add ax, bx
+call print_num
+PRINTN
+loop phyb
+ret
+DEFINE_PRINT_NUM
+DEFINE_PRINT_NUM_UNS
+
+
+
+; [SOURCE]: D:\Users\user-pc\Desktop\Magshimim\Computers101\add100.asm
